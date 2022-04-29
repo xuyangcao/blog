@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 ---
 
 Blogs and Daily Learning Notes.
