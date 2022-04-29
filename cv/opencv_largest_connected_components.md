@@ -54,7 +54,11 @@ if __name__ == '__main__':
 ```
 结果如下:
 
-![](./opencv_largest_connected_components/contours.png)
+<div class="fig figcenter fighighlight">
+  <img src="./opencv_largest_connected_components/contours.png">
+  <div class="figcaption">Contours</div>
+</div>
+
 ![](./opencv_largest_connected_components/result.png)
 
 分析上述结果可以发现存在两个问题:
