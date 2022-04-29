@@ -54,9 +54,9 @@ if __name__ == '__main__':
 ```
 结果如下:
 
-<div class="fig figcenter fighighlight">
+<div>
   <img src="./opencv_largest_connected_components/contours.png">
-  <div class="figcaption">Contours</div>
+  <div>Contours</div>
 </div>
 
 ![](./opencv_largest_connected_components/result.png)
