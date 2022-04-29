@@ -53,8 +53,9 @@ if __name__ == '__main__':
 
 ```
 结果如下:
-{% asset_img contours.png 400 400 原始图像 %}
-{% asset_img result.png 400 400 去除结果 %}
+
+![](./opencv_largest_connected_components/contours.png)
+![](./opencv_largest_connected_components/result.png)
 
 分析上述结果可以发现存在两个问题:
 1. 使用findContours函数检测边缘时如果最大连通域出现中空情况，则结果会将中空的部分填充上，得到错误的结果，本图因为中间没空，所以看起来效果是对的。
@@ -146,10 +147,11 @@ def largestConnectComponent(bw_img, ):
 
 检查代码发现在这个地方:`lcc = (labeled_img == max_label)`.如果只有一个最大连通域，那么函数不会执行`for`循环，直接进入`lcc = (labeled_img == max_label)`,此时如果`max_label`如果是`0`，则会直接把背景当做最大连通域了，因此必须把`max_label`设置为1.
 
-{% asset_img before.png 原始二值图像 %}
-{% asset_img 0-after.png `max_label`为`0`时结果 %}
-{% asset_img 1-after.png `max_label`为`1`时结果 %}
+![](./opencv_largest_connected_components/before.png)
 
+![](./opencv_largest_connected_components/0-after.png)
+
+![](./opencv_largest_connected_components/1-after.png)
 
 ## c++版
 由于opencv3中增加了连通域标记函数，因此使得查找最大连通域变得更加容易。代码如下：
