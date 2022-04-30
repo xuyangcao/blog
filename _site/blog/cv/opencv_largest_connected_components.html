@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Blog and Learning Notes</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="">
+  <link rel="canonical" href="http://localhost:4001/blog/cv/opencv_largest_connected_components">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/blog/css/main.css">
+
+  <!-- Google fonts -->
+  <!-- <link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->
+
+  <!-- Google tracking -->
+  <!-- <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-46895817-2', 'auto');
+    ga('send', 'pageview');
+  </script> -->
+</head>
+
+
+    <body>
+
+      <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+      <script>addBackToTop({
+        backgroundColor: '#fff',
+        innerHTML: 'Back to Top',
+        textColor: '#333'
+      })</script>
+      <style>
+        #back-to-top {
+          border: 1px solid #ccc;
+          border-radius: 0;
+          font-family: sans-serif;
+          font-size: 14px;
+          width: 100px;
+          text-align: center;
+          line-height: 30px;
+          height: 30px;
+        }
+      </style>
+
+    <header class="site-header">
+
+  <a class="site-title" href="http://localhost:4001">Blog and Learning Notes</a>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      <div class="post">
+
+  <header class="post-header">
+    <h1></h1>
+  </header>
+
+  <article class="post-content">
+  <ul>
+  <li><a href="#前言">前言</a></li>
+  <li><a href="#错误的版本">错误的版本</a>
+    <ul>
+      <li><a href="#python版">Python版</a></li>
+      <li><a href="#c版">c++版</a></li>
+    </ul>
+  </li>
+  <li><a href="#改进的版本">改进的版本</a>
+    <ul>
+      <li><a href="#python版-1">Python版</a></li>
+      <li><a href="#c版-1">c++版</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="前言">前言</h1>
+
+<p>之前在印象笔记中写过一个python+opencv版的最大连通域标记的程序，当时使用的是opencv2版本中的findContours函数作为载体，由于没有在意findContours中的各个contours之间的hierarchy关系，后来在一次实验中发现这种方式是有不足之处的，最方便的还是使用连通域标记算法将图像标记为各个连通域，然后在取连通域最大的区域这种方法。</p>
+
+<h1 id="错误的版本">错误的版本</h1>
+
+<p>先贴出错误的版本，这个版本的想法是使用findContours函数找到各个连通域的contours，然后选取contours面积最大的那个作为目标区域，并将其填充。findContours使用的是EXTERNAL的方式标记边缘。显然这种方法如果是一个大的连通域里面是中空的，则标记后的最大连通域会将中间空的部分填充上，因此出错。</p>
+
+<h2 id="python版">Python版</h2>
+
+<p>之前的python版主要实现功能是利用opencv获取最大连通区域并去除。将之前在印象笔记里写的记录摘抄下来如下:</p>
+
+<p>主要使用了如下方法：</p>
+<blockquote>
+  <ul>
+    <li>首先通过findContours函数找到二值图像中的所有边界(这块看需要调节里面的参数)</li>
+    <li>然后通过contourArea函数计算每个边界内的面积</li>
+    <li>最后通过fillConvexPoly函数将面积最大的边界内部涂成背景</li>
+  </ul>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="err">​</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">imread</span><span class="p">(</span><span class="s">'bw.bmp'</span><span class="p">)</span>
+    <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+<span class="err">​</span>
+    <span class="c1">#find contours of all the components and holes 
+</span>    <span class="n">gray_temp</span> <span class="o">=</span> <span class="n">gray</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1">#copy the gray image because function
+</span>                            <span class="c1">#findContours will change the imput image into another  
+</span>    <span class="n">contours</span><span class="p">,</span> <span class="n">hierarchy</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">findContours</span><span class="p">(</span><span class="n">gray_temp</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">RETR_TREE</span><span class="p">,</span> <span class="n">cv2</span><span class="p">.</span><span class="n">CHAIN_APPROX_NONE</span><span class="p">)</span>
+<span class="err">​</span>
+    <span class="c1">#show the contours of the imput image
+</span>    <span class="n">cv2</span><span class="p">.</span><span class="n">drawContours</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">contours</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="s">'original image with contours'</span><span class="p">),</span> <span class="n">plt</span><span class="p">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s">'gray'</span><span class="p">)</span>
+<span class="err">​</span>
+    <span class="c1">#find the max area of all the contours and fill it with 0
+</span>    <span class="n">area</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">contours</span><span class="p">)):</span>
+        <span class="n">area</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">contourArea</span><span class="p">(</span><span class="n">contours</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="n">max_idx</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="p">.</span><span class="n">fillConvexPoly</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="n">contours</span><span class="p">[</span><span class="n">max_idx</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c1">#show image without max connect components 
+</span>    <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="s">'remove max connect com'</span><span class="p">),</span> <span class="n">plt</span><span class="p">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s">'gray'</span><span class="p">)</span>
+<span class="err">​</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>结果如下:</p>
+
+<div class="fig figcenter">
+    <img src="/assset/opencv_largest_connected_components/contours.png" />
+    <div class="figcaption">src</div>
+</div>
+
+<div class="fig figcenter">
+    <img src="/assset/opencv_largest_connected_components/result.png" />
+    <div class="figcaption">去除最大连通域之后结果</div>
+</div>
+
+<p>分析上述结果可以发现存在两个问题:</p>
+<ol>
+  <li>使用findContours函数检测边缘时如果最大连通域出现中空情况，则结果会将中空的部分填充上，得到错误的结果，本图因为中间没空，所以看起来效果是对的。</li>
+  <li>使用fillConvexPoly这个函数是有缺陷的，如果最大连通域不是凸的，则会得到错误的填充结果。</li>
+</ol>
+
+<h2 id="c版">c++版</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void findLargesrArea(Mat srcImage, Mat &amp;dstImage)
+{
+    vector&lt;vector&lt;Point&gt;&gt;	contours;
+    vector&lt;Vec4i&gt;			hierarchy;
+
+    findContours(srcImage.clone(), contours, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE);
+
+    double max_area = 0;
+    int index = 0;
+    for(int i = 0; i &lt; contours.size(); i++) 
+    {
+        if(contourArea(contours[i]) &gt; max_area)
+        {
+            max_area = contourArea(contours[i]); 
+            index = i;
+        }
+    }
+    //cout &lt;&lt; "max_index: " &lt;&lt; index &lt;&lt; endl;
+
+    dstImage =  Mat::zeros(srcImage.rows, srcImage.cols, srcImage.type()); 
+    drawContours(dstImage, contours, index, Scalar(255));
+    imfill(dstImage, dstImage);
+}
+
+void imfill(Mat srcimage, Mat &amp;dstimage)
+{
+    Size m_Size = srcimage.size();  
+    Mat temimage = Mat::zeros(m_Size.height + 2, m_Size.width + 2, srcimage.type());
+
+    srcimage.copyTo(temimage(Range(1, m_Size.height + 1), Range(1, m_Size.width + 1)));  
+    floodFill(temimage, Point(0,0), Scalar(255)); 
+    Mat cutImg;
+    temimage(Range(1, m_Size.height + 1), Range(1, m_Size.width + 1)).copyTo(cutImg);  
+    dstimage = srcimage | (~cutImg);  
+}
+
+</code></pre></div></div>
+<p>c++这个版本存在上述第1个问题，但是不存在第2个问题，原因是其使用了自定义的imfill函数，避免了图像非凸出现错误的情况。</p>
+
+<h1 id="改进的版本">改进的版本</h1>
+
+<h2 id="python版-1">Python版</h2>
+<p>最近发现图像处理库skimage很好用，因此用skimage写了一个函数用于标记最大连通域:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">largestConnectComponent</span><span class="p">(</span><span class="n">bw_img</span><span class="p">,</span> <span class="p">):</span>
+    <span class="s">'''
+    compute largest Connect component of an labeled image
+    
+    Parameters:
+    ---
+
+    bw_img:
+        binary image
+
+    Example:
+    ---
+        &gt;&gt;&gt; lcc = largestConnectComponent(bw_img)
+
+    '''</span>
+
+    <span class="n">labeled_img</span><span class="p">,</span> <span class="n">num</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">bw_img</span><span class="p">,</span> <span class="n">neighbors</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">return_num</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>    
+    <span class="c1"># plt.figure(), plt.imshow(labeled_img, 'gray')
+</span>
+    <span class="c1"># max_label = 0
+</span>    <span class="n">max_label</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">max_num</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># 这里从1开始，防止将背景设置为最大连通域
+</span>        <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">labeled_img</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_num</span><span class="p">:</span>
+            <span class="n">max_num</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">labeled_img</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">max_label</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="n">lcc</span> <span class="o">=</span> <span class="p">(</span><span class="n">labeled_img</span> <span class="o">==</span> <span class="n">max_label</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">lcc</span>
+
+</code></pre></div></div>
+<p><strong>注意(2018.10.10添加)</strong></p>
+
+<p>有一次我在使用的时候发现有个参数还挺重要，就是这个<code class="language-plaintext highlighter-rouge">max_label</code>,如果把它设置为0，那么当一张图像只有一个连通域的时候，其结果正好是原始图像的反。</p>
+
+<p>检查代码发现在这个地方:<code class="language-plaintext highlighter-rouge">lcc = (labeled_img == max_label)</code>.如果只有一个最大连通域，那么函数不会执行<code class="language-plaintext highlighter-rouge">for</code>循环，直接进入<code class="language-plaintext highlighter-rouge">lcc = (labeled_img == max_label)</code>,此时如果<code class="language-plaintext highlighter-rouge">max_label</code>如果是<code class="language-plaintext highlighter-rouge">0</code>，则会直接把背景当做最大连通域了，因此必须把<code class="language-plaintext highlighter-rouge">max_label</code>设置为1.</p>
+
+<div class="fig figcenter">
+    <img src="/assset/opencv_largest_connected_components/before.png" />
+    <div class="figcaption">Before</div>
+</div>
+
+<div class="fig figcenter">
+    <img src="/assset/opencv_largest_connected_components/0-after.png" />
+    <div class="figcaption">max_label为0时结果</div>
+</div>
+
+<div class="fig figcenter">
+    <img src="/assset/opencv_largest_connected_components/1-after.png" />
+    <div class="figcaption">max_label为1时结果</div>
+</div>
+
+<h2 id="c版-1">c++版</h2>
+<p>由于opencv3中增加了连通域标记函数，因此使得查找最大连通域变得更加容易。代码如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void DefectsDetector::LargestConnecttedComponent(Mat srcImage, Mat &amp;dstImage)
+{
+    Mat temp;
+    Mat labels;
+    srcImage.copyTo(temp);
+
+    //1. 标记连通域
+    int n_comps = connectedComponents(temp, labels, 4, CV_16U);
+    vector&lt;int&gt; histogram_of_labels;
+    for (int i = 0; i &lt; n_comps; i++)//初始化labels的个数为0
+    {
+        histogram_of_labels.push_back(0);
+    }
+
+    int rows = labels.rows;
+    int cols = labels.cols;
+    for (int row = 0; row &lt; rows; row++) //计算每个labels的个数
+    {
+        for (int col = 0; col &lt; cols; col++)
+        {
+            histogram_of_labels.at(labels.at&lt;unsigned short&gt;(row, col)) += 1;
+        }
+    }
+    histogram_of_labels.at(0) = 0; //将背景的labels个数设置为0
+
+    //2. 计算最大的连通域labels索引
+    int maximum = 0;
+    int max_idx = 0;
+    for (int i = 0; i &lt; n_comps; i++)
+    {
+        if (histogram_of_labels.at(i) &gt; maximum)
+        {
+            maximum = histogram_of_labels.at(i);
+            max_idx = i;
+        }
+    }
+
+    //3. 将最大连通域标记为1
+    for (int row = 0; row &lt; rows; row++) 
+    {
+        for (int col = 0; col &lt; cols; col++)
+        {
+            if (labels.at&lt;unsigned short&gt;(row, col) == max_idx)
+            {
+                labels.at&lt;unsigned short&gt;(row, col) = 255;
+            }
+            else
+            {
+                labels.at&lt;unsigned short&gt;(row, col) = 0;
+            }
+        }
+    }
+
+    //4. 将图像更改为CV_8U格式
+    labels.convertTo(dstImage, CV_8U);
+}
+</code></pre></div></div>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrap">
+
+    <div class="footer-col-1 column">
+      <ul>
+
+        
+        
+        <!-- <li>
+          <a href="mailto:"></a>
+        </li> -->
+       @xuyangcao
+      </ul>
+    </div>
+
+    <div class="footer-col-2 column">
+
+    </div>
+
+    <div class="footer-col-3 column">
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+    <!-- mathjax -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+      // Make responsive
+      MathJax.Hub.Config({
+       "HTML-CSS": { linebreaks: { automatic: true } },
+       "SVG": { linebreaks: { automatic: true } },
+      });
+    </script>
+
+    </body>
+</html>

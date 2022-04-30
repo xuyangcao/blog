@@ -1,12 +1,19 @@
-title: Your awesome title
-email:
+# Site settings
+title: Blog and Learning Notes 
+email: 
 description: 
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://xuyangcao.github.io/blog/" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: 
+baseurl: ""
+url: "https://xuyangcao.github.io/blog"
+courseurl:
+twitter_username:
 github_username:
 
 # Build settings
-theme:
-# plugins:
-#   - jekyll-feed
+markdown: kramdown
+permalink: pretty
+
+highlighter: rouge
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
