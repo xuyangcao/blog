@@ -1,8 +1,7 @@
 ---
-layout: default
+layout: page
+permalink: /cv/learn_transformer_1/
 ---
-
-[Back](index.md)
 
 - [前言](#前言)
 - [注意力机制](#注意力机制)

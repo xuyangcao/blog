@@ -1,9 +1,7 @@
 ---
-layout: default
+layout: page
+permalink: '/cv/opencv_largest_connected_components'
 ---
-
-
-[Back](../index.md)
 
 - [前言](#前言)
 - [错误的版本](#错误的版本)
@@ -15,18 +13,23 @@ layout: default
 
 
 # 前言
+
 之前在印象笔记中写过一个python+opencv版的最大连通域标记的程序，当时使用的是opencv2版本中的findContours函数作为载体，由于没有在意findContours中的各个contours之间的hierarchy关系，后来在一次实验中发现这种方式是有不足之处的，最方便的还是使用连通域标记算法将图像标记为各个连通域，然后在取连通域最大的区域这种方法。
 
 # 错误的版本
+
 先贴出错误的版本，这个版本的想法是使用findContours函数找到各个连通域的contours，然后选取contours面积最大的那个作为目标区域，并将其填充。findContours使用的是EXTERNAL的方式标记边缘。显然这种方法如果是一个大的连通域里面是中空的，则标记后的最大连通域会将中间空的部分填充上，因此出错。
 
 ## Python版
+
 之前的python版主要实现功能是利用opencv获取最大连通区域并去除。将之前在印象笔记里写的记录摘抄下来如下:
 
 主要使用了如下方法：
 >*  首先通过findContours函数找到二值图像中的所有边界(这块看需要调节里面的参数)
 >*  然后通过contourArea函数计算每个边界内的面积
 >*  最后通过fillConvexPoly函数将面积最大的边界内部涂成背景
+
+
 ```python
 import cv2
 import numpy as np
@@ -55,24 +58,28 @@ if __name__ == '__main__':
     plt.figure('remove max connect com'), plt.imshow(gray, cmap = 'gray')
 ​
     plt.show()
-
 ```
+
+
 
 结果如下:
 
-<div class="fig figcenter fighighlight">
-    <img src="./opencv_largest_connected_components/contours.png">
+<div class="fig figcenter">
+    <img src="/assset/opencv_largest_connected_components/contours.png">
     <div class="figcaption">src</div>
 </div>
 
-<div align="center">
-    <img src="./opencv_largest_connected_components/result.png" width=60%>
-    <div>去除最大连通域之后结果</div>
+
+<div class="fig figcenter">
+    <img src="/assset/opencv_largest_connected_components/result.png">
+    <div class="figcaption">去除最大连通域之后结果</div>
 </div>
 
 分析上述结果可以发现存在两个问题:
 1. 使用findContours函数检测边缘时如果最大连通域出现中空情况，则结果会将中空的部分填充上，得到错误的结果，本图因为中间没空，所以看起来效果是对的。
 2. 使用fillConvexPoly这个函数是有缺陷的，如果最大连通域不是凸的，则会得到错误的填充结果。
+
+
 
 
 ## c++版
@@ -160,20 +167,21 @@ def largestConnectComponent(bw_img, ):
 
 检查代码发现在这个地方:`lcc = (labeled_img == max_label)`.如果只有一个最大连通域，那么函数不会执行`for`循环，直接进入`lcc = (labeled_img == max_label)`,此时如果`max_label`如果是`0`，则会直接把背景当做最大连通域了，因此必须把`max_label`设置为1.
 
-<div align="center">
-    <img src="./opencv_largest_connected_components/before.png" width=60%>
-    <div>src</div>
+<div class="fig figcenter">
+    <img src="/assset/opencv_largest_connected_components/before.png">
+    <div class="figcaption">Before</div>
 </div>
 
-<div align="center">
-    <img src="./opencv_largest_connected_components/0-after.png" width=60%>
-    <div>max_label为0时结果</div>
+<div class="fig figcenter">
+    <img src="/assset/opencv_largest_connected_components/0-after.png">
+    <div class="figcaption">max_label为0时结果</div>
 </div>
 
-<div align="center">
-    <img src="./opencv_largest_connected_components/1-after.png" width=60%>
-    <div>max_label为1时结果</div>
+<div class="fig figcenter">
+    <img src="/assset/opencv_largest_connected_components/1-after.png">
+    <div class="figcaption">max_label为1时结果</div>
 </div>
+
 
 ## c++版
 由于opencv3中增加了连通域标记函数，因此使得查找最大连通域变得更加容易。代码如下：

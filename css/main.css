@@ -105,7 +105,8 @@ a:visited { color: #205caa; }
   font-weight: 400;
   font-size: 14px;
   color: #575651;
-  text-align: justify;
+  /* text-align: justify; */
+  text-align: center;
 }
 
 .post-content p {
@@ -455,5 +456,4 @@ a:visited { color: #205caa; }
     clear: both;
     width: auto;
     margin: 0 0 15px; }
-
 }
