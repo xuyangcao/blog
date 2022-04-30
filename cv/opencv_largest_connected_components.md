@@ -1,3 +1,8 @@
+---
+layout: default
+---
+
+
 [Back](../index.md)
 
 - [前言](#前言)
@@ -55,9 +60,9 @@ if __name__ == '__main__':
 
 结果如下:
 
-<div align="center">
-    <img src="./opencv_largest_connected_components/contours.png" width=60%>
-    <div>src</div>
+<div class="fig figcenter fighighlight">
+    <img src="./opencv_largest_connected_components/contours.png">
+    <div class="figcaption">src</div>
 </div>
 
 <div align="center">
