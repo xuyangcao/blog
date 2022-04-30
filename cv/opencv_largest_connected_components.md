@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: '/blog/cv/opencv_largest_connected_components'
+permalink: '/blog/cv/opencv_largest_connected_components.md'
 ---
 
 - [前言](#前言)
