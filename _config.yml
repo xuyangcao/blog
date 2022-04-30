@@ -1,18 +1,12 @@
-# Site settings
-title: Blogs and Learning Nones 
-email: 
-description: # this means to ignore newlines until "baseurl:"
+title: Your awesome title
+email:
+description: 
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://xuyangcao.github.io/blog" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http://xuyangcao.github.io/blog" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
 github_username:
 
 # Build settings
-markdown: kramdown
-permalink: pretty
-
-highlighter: rouge
-kramdown:
-  input: GFM
-  auto_ids: true
-  syntax_highlighter: rouge
+# theme: minima
+# plugins:
+#   - jekyll-feed
