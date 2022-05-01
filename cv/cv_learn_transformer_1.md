@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /blog/cv/learn_transformer_1/
+permalink: /blog/cv/cv_learn_transformer_1/
 ---
 
 - [前言](#前言)
