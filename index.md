@@ -3,5 +3,5 @@ layout: default
 ---
 
 # 计算机视觉
-- [opencv](/blog/cv/opencv_largest_connected_components.md)
+- [opencv](./cv_opencv_lcc.md)
 # 测试

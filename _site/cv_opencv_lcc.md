@@ -7,7 +7,7 @@
   <title>Blog and Learning Notes</title>
   <meta name="viewport" content="width=device-width">
   <meta name="description" content="">
-  <link rel="canonical" href="http://localhost:4001/blog/cv/opencv_largest_connected_components.md">
+  <link rel="canonical" href="http://localhost:4001/cv_opencv_lcc.md">
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/blog/css/main.css">
