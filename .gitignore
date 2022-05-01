@@ -120,3 +120,9 @@ runs/
 temp*
 debug_*
 *.swp
+
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
