@@ -1,6 +1,5 @@
 ---
 layout: page
-permalink: '/blog/cv/cv_opencv_lcc'
 ---
 
 - [前言](#前言)
