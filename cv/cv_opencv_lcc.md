@@ -63,13 +63,13 @@ if __name__ == '__main__':
 结果如下:
 
 <div class="fig figcenter">
-    <img src="/blog/asssets/opencv_largest_connected_components/contours.png">
+    <img src="{{ site.baseurl }}/asssets/opencv_largest_connected_components/contours.png">
     <div class="figcaption">src</div>
 </div>
 
 
 <div class="fig figcenter">
-    <img src="/blog/asssets/opencv_largest_connected_components/result.png">
+    <img src="{{ site.baseurl }}/asssets/opencv_largest_connected_components/result.png">
     <div class="figcaption">去除最大连通域之后结果</div>
 </div>
 
@@ -166,17 +166,17 @@ def largestConnectComponent(bw_img, ):
 检查代码发现在这个地方:`lcc = (labeled_img == max_label)`.如果只有一个最大连通域，那么函数不会执行`for`循环，直接进入`lcc = (labeled_img == max_label)`,此时如果`max_label`如果是`0`，则会直接把背景当做最大连通域了，因此必须把`max_label`设置为1.
 
 <div class="fig figcenter">
-    <img src="/blog/asssets/opencv_largest_connected_components/before.png">
+    <img src="{{ site.baseurl }}/asssets/opencv_largest_connected_components/before.png">
     <div class="figcaption">Before</div>
 </div>
 
 <div class="fig figcenter">
-    <img src="/blog/asssets/opencv_largest_connected_components/0-after.png">
+    <img src="{{ site.baseurl }}/asssets/opencv_largest_connected_components/0-after.png">
     <div class="figcaption">max_label为0时结果</div>
 </div>
 
 <div class="fig figcenter">
-    <img src="/blog/asssets/opencv_largest_connected_components/1-after.png">
+    <img src="{{ site.baseurl }}/asssets/opencv_largest_connected_components/1-after.png">
     <div class="figcaption">max_label为1时结果</div>
 </div>
 
