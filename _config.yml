@@ -2,8 +2,8 @@
 title: Blog and Learning Notes 
 email: 
 description: 
-baseurl: ""
-url: "https://xuyangcao.github.io/blog"
+baseurl: "/blog"
+url: "https://xuyangcao.github.io"
 courseurl:
 twitter_username:
 github_username:
