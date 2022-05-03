@@ -11,15 +11,15 @@ layout: page
   - [c++版](#c版-1)
 
 
-# 前言
+## 前言
 
 之前在印象笔记中写过一个python+opencv版的最大连通域标记的程序，当时使用的是opencv2版本中的findContours函数作为载体，由于没有在意findContours中的各个contours之间的hierarchy关系，后来在一次实验中发现这种方式是有不足之处的，最方便的还是使用连通域标记算法将图像标记为各个连通域，然后在取连通域最大的区域这种方法。
 
-# 错误的版本
+## 错误的版本
 
 先贴出错误的版本，这个版本的想法是使用findContours函数找到各个连通域的contours，然后选取contours面积最大的那个作为目标区域，并将其填充。findContours使用的是EXTERNAL的方式标记边缘。显然这种方法如果是一个大的连通域里面是中空的，则标记后的最大连通域会将中间空的部分填充上，因此出错。
 
-## Python版
+### Python版
 
 之前的python版主要实现功能是利用opencv获取最大连通区域并去除。将之前在印象笔记里写的记录摘抄下来如下:
 
@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
 
 
-## c++版
+### c++版
 ```
 void findLargesrArea(Mat srcImage, Mat &dstImage)
 {
@@ -122,9 +122,9 @@ void imfill(Mat srcimage, Mat &dstimage)
 c++这个版本存在上述第1个问题，但是不存在第2个问题，原因是其使用了自定义的imfill函数，避免了图像非凸出现错误的情况。
 
 
-# 改进的版本
+## 改进的版本
 
-## Python版
+### Python版
 最近发现图像处理库skimage很好用，因此用skimage写了一个函数用于标记最大连通域:
 
 ```python
@@ -181,7 +181,7 @@ def largestConnectComponent(bw_img, ):
 </div>
 
 
-## c++版
+### c++版
 由于opencv3中增加了连通域标记函数，因此使得查找最大连通域变得更加容易。代码如下：
 
 ```
