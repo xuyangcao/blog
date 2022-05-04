@@ -115,7 +115,7 @@ a:visited { color: #205caa; }
 
 .kw {
   font-size: 15px;
-  #color: #08A;
+  /* color: #08A; */
   color: #A61717;
   margin-left: 5px;
 }
