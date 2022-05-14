@@ -26,7 +26,7 @@ layout: page
 
 （1）[自注意力与多头注意力模型的原理与实现]({{site.baseurl}}/cv/cv_learn_transformer_1)。
 
-（2）Transformer的整体架构与实现。
+（2）[Transformer的整体架构与实现]({{site.baseurl}}/cv/cv_learn_transformer_2)。
 
 （3）位置编码（positional encoding）的原理与实现。
 
