@@ -43,7 +43,7 @@ layout: page
 
 我们以一个自然语言处理中的序列翻译问题为例，直观地理解自注意力模型是如何发挥作用的，如下图所示。
 
-<div class="fig figcenter fighighlight">
+<div class="fig figcenter">
     <img src="{{ site.baseurl }}/asssets/learn_transformer/self_attention_visualization_0.png" width=300px>
     <img src="{{ site.baseurl }}/asssets/learn_transformer/self_attention_visualization_1.png" width=450px>
     <div class="figcaption">自注意力机制示意图[1][3]。</div>
@@ -60,7 +60,7 @@ layout: page
 
 我们以channel attention为例，可以看到channel attention模型通过重新分配特征图通道的权重，使模型更加关注某些通道，如下图所示。
 
-<div class="fig figcenter fighighlight">
+<div class="fig figcenter">
     <img src="{{ site.baseurl }}/asssets/learn_transformer/seblock.png" width=650px>
     <div class="figcaption">Squeeze-and-Excitation block (channel attention) [5]。</div>
 </div>
@@ -149,6 +149,12 @@ $$
 
 这里Q, K, V分表表示矩阵形式的query，key和value；$d_{k}$表示向量key的维度。
 
+下图是self-attention在Transformer[3]中的抽象总结，供参考。
+
+<div class="fig figcenter">
+    <img src="{{ site.baseurl }}/asssets/learn_transformer/self_attention_demo.png" width=130px>
+    <div class="figcaption">Self-attention in Transformer [2].</div>
+</div>
 
 ## 代码分析
 
@@ -246,6 +252,12 @@ $$
 其中，$W^Q_i \in \mathbb{R}^{d_{\text{model}}\times d_k}$, $W^K_i \in \mathbb{R}^{d_{\text{model}}\times d_k}$, 
 $W^V_i \in \mathbb{R}^{d_{\text{model}} \times d_v}$，$W^O \in \mathbb{R}^{hd_v \times d_{\text{model}}}$。一般地，自注意力头数设置为8，即$h=8$，而$d_k=k_v=d_{model}/h$。
 
+下图是multi-heads self-attention在Transformer[3]中的抽象总结，供参考。
+
+<div class="fig figcenter">
+    <img src="{{ site.baseurl }}/asssets/learn_transformer/multi_heads_attention_demo.png" width=300px>
+    <div class="figcaption">Multi-heads self-attention in Transformer [2].</div>
+</div>
 
 ## 代码分析
 
