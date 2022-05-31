@@ -4,24 +4,85 @@ layout: page
 
 <!-- vim-markdown-toc Marked -->
 
-* [242有效的字母异位词](#242有效的字母异位词)
-* [349两个数组的交集](#349两个数组的交集)
-* [202快乐数](#202快乐数)
-* [383赎金信](#383赎金信)
-* [1两数之和](#1两数之和)
-* [454四数相加II](#454四数相加ii)
+* [27移除元素](#27移除元素)
+* [344反转字符串](#344反转字符串)
+* [剑指Offer05替换空格](#剑指offer05替换空格)
+* [206反转链表](#206反转链表)
+* [19删除链表的倒数第N个结点](#19删除链表的倒数第n个结点)
+* [142环形链表II](#142环形链表ii)
 * [15三数之和](#15三数之和)
 * [18四数之和](#18四数之和)
 * [总结与思考](#总结与思考)
+* [参考资料](#参考资料)
 
 <!-- vim-markdown-toc -->
 
-
-## 242有效的字母异位词
+## 27移除元素
 
 **链接**
 
-https://leetcode.cn/problems/valid-anagram/
+https://leetcode.cn/problems/remove-element/
+
+**思路**
+
+见代码随想录
+
+快慢指针
+
+**代码**
+
+```cpp
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int slow_index = 0;
+        for (int fast_index = 0; fast_index < nums.size(); fast_index++) {
+            if (nums[fast_index] != val) {
+                nums[slow_index] = nums[fast_index];
+                slow_index += 1; //替换完之后，慢指针前移一步
+            }
+        }
+        //注意这里没有加1，因为第8行已经加过了，此时指向的内容还没经过确认
+        return slow_index; 
+    }
+};
+```
+
+## 344反转字符串
+
+**链接**
+
+https://leetcode.cn/problems/reverse-string/
+
+**思路**
+
+见代码随想录
+
+左右指针
+
+**代码**
+
+```cpp
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+        /*双指针 */
+        int left = 0; 
+        int right = s.size() - 1;
+        while (left < right) {
+            swap(s[left], s[right]);
+            left++;
+            right--;
+        }
+    }
+};
+```
+
+## 剑指Offer05替换空格
+
+**链接**
+
+https://leetcode.cn/problems/ti-huan-kong-ge-lcof/
 
 **思路**
 
@@ -32,59 +93,25 @@ https://leetcode.cn/problems/valid-anagram/
 ```cpp
 class Solution {
 public:
-    bool isAnagram(string s, string t) {
-        if (s.size() != t.size()) {
-            return false;
-        }
-
-        int dict[26] = {0};
-        for (int i = 0; i < s.size(); i++) {
-            dict[s[i] - 'a']++;
-        }
-        for (int i = 0; i < t.size(); i++) {
-            dict[t[i] - 'a']--;
-        }
-        for (int i = 0; i < 26; i++) {
-            if (dict[i] != 0) {
-                return false;
+    string replaceSpace(string s) {
+        string result;
+        for (char str : s) {
+            if (str == ' ') {
+                result += "%20";
+                continue;
             }
-        }
-        return true;
-    }
-};
-```
-
-
-
-## 349两个数组的交集
-
-**链接**
-
-https://leetcode.cn/problems/intersection-of-two-arrays/
-
-```cpp
-class Solution {
-public:
-    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
-        unordered_set<int> mem_set(nums1.begin(), nums1.end());
-        unordered_set<int> nums2_(nums2.begin(), nums2.end());
-
-        vector<int> result;
-        for (int num : nums2_) {
-            if(mem_set.find(num) != mem_set.end()) {
-                result.push_back(num);
-            }
+            result += str;
         }
         return result;
     }
 };
 ```
 
-## 202快乐数
+## 206反转链表
 
 **链接**
 
-https://leetcode.cn/problems/happy-number/
+https://leetcode.cn/problems/reverse-linked-list/
 
 **思路**
 
@@ -93,41 +120,39 @@ https://leetcode.cn/problems/happy-number/
 **代码**
 
 ```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
-    int GetSum(int num) {
-        int sum = 0;
-        int res = 0;
-        while (num) {
-            res = num % 10;
-            sum += res * res;
-            num /= 10;
-        }
-        return sum;
-    }
+    ListNode* reverseList(ListNode* head) {
+        ListNode* pre = NULL;
+        ListNode* cur = head;
 
-    bool isHappy(int n) {
-        unordered_set<int> mem;
-        int sum = GetSum(n);
-        while (1) {
-            if (sum == 1) { //如果为1，则返回真
-                return true;
-            } else if (mem.find(sum) != mem.end()) { //如果在集合中出现了，说明循环了
-                return false;
-            } else { //否则将结果加入集合，并继续计算sum
-                mem.insert(sum);
-                sum = GetSum(sum);
-            }
+        ListNode* temp = NULL;
+        while (cur) {
+           temp = cur->next; 
+           cur->next = pre;
+           pre = cur;
+           cur = temp;
         }
+        return pre;
     }
 };
 ```
 
-## 383赎金信
+## 19删除链表的倒数第N个结点
 
 **链接**
 
-https://leetcode.cn/problems/ransom-note/
+https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
 
 **思路**
 
@@ -136,63 +161,44 @@ https://leetcode.cn/problems/ransom-note/
 **代码**
 
 ```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
-    bool canConstruct(string ransomNote, string magazine) {
-        int dic[26] = {0};
-        for (int i = 0; i < magazine.size(); i++) {
-            dic[magazine[i] - 'a']++;
-        }
-        for (int i = 0; i < ransomNote.size(); i++) {
-            dic[ransomNote[i] - 'a']--;
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* dummy_head = new ListNode(0);
+        dummy_head->next = head;
+        ListNode* left = dummy_head;
+        ListNode* right = head;
 
-            if (dic[ransomNote[i] - 'a'] < 0) {
-                return false;
-            }
+        for (int i = 0; i < n; i++) {
+            right = right->next;
         }
-        return true;
+        while (right) {
+            right = right->next;
+            left = left->next;
+        }
+        left->next = left->next->next;
+        head = dummy_head->next;
+        delete dummy_head;
+        return head;
     }
 };
 ```
 
-
-## 1两数之和
-
-**链接**
-
-https://leetcode.cn/problems/two-sum/
-
-**思路**
-
-见代码随想录
-
-
-**代码**
-
-```cpp
-class Solution {
-public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int, int> umap;
-        vector<int> result;
-        for (int i = 0; i < nums.size(); i++) {
-            if (umap.find(target - nums[i]) != umap.end()) {
-                result.push_back(umap.find(target - nums[i])->second);
-                result.push_back(i);
-                return result;
-            }
-            umap.insert(pair<int, int>(nums[i], i));
-        }
-        return result;
-    }
-};
-```
-
-## 454四数相加II
+## 142环形链表II
 
 **链接**
 
-https://leetcode.cn/problems/4sum-ii/
+https://leetcode.cn/problems/linked-list-cycle-ii/
 
 **思路**
 
@@ -201,28 +207,39 @@ https://leetcode.cn/problems/4sum-ii/
 **代码**
 
 ```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
-    int fourSumCount(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3, vector<int>& nums4) {
-        unordered_map<int, int> umap_ab;
-        int count = 0;
-        for (int a : nums1) {
-            for (int b : nums2) {
-                umap_ab[a + b]++;
-            }
+    ListNode *detectCycle(ListNode *head) {
+        if (!head) {
+            return NULL;
         }
-        for (int c : nums3) {
-            for (int d : nums4) {
-                if (umap_ab.find(0 - c - d) != umap_ab.end()) {
-                    count += umap_ab[- c - d];
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while (fast->next != NULL && fast->next->next != NULL) {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (fast == slow) {
+                ListNode* left = head;
+                ListNode* right = fast;
+                while (left != right) {
+                    left = left->next;
+                    right = right->next;
                 }
+                return right;
             }
         }
-        return count;
+       return NULL; 
     }
 };
 ```
-
 
 ## 15三数之和
 
@@ -233,7 +250,6 @@ https://leetcode.cn/problems/3sum/
 **思路**
 
 见代码随想录
-
 
 **代码**
 
@@ -333,21 +349,7 @@ public:
 
 ## 总结与思考
 
-- 一般的，如果仅仅需要将26个英文字母存入hash table，则可以考虑用数组的形式，因为这样增删和查询速度更快。如 [242. 有效的字母异位词](#242.-有效的字母异位词) 和 [383. 赎金信](#383.-赎金信)
 
-- 当大数相加会导致潜在的溢出时，可以考虑相减的形式，例如 [18. 四数之和](#18.-四数之和)。
+## 参考资料
 
-- 常用: 求一个数各个位数上的和，如下:
-
-    ```cpp
-    int GetSum(int num) {
-        int sum = 0;
-        int res = 0;
-        while (num) {
-            res = num % 10;
-            sum += res * res;
-            num /= 10;
-        }
-        return sum;
-    }
-    ```
+- [Leetcode: 双指针](https://leetcode.cn/tag/two-pointers/problemset/)
