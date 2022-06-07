@@ -14,20 +14,20 @@ layout: page
 ## 前言
 
 
-
 ## 题目列表
 
 | 题目 | 链接 | 
 |:------|:------|
-| 144. 二叉树的前序遍历 | [https://programmercarl.com/](https://programmercarl.com/) | 
-| 94. 二叉树的中序遍历 | [https://leetcode.cn/problems/binary-tree-inorder-traversal/](https://leetcode.cn/problems/binary-tree-inorder-traversal/) |
-| 226. 翻转二叉树 | [https://leetcode.cn/problems/invert-binary-tree/](https://leetcode.cn/problems/invert-binary-tree/) |
-| 101. 对称二叉树 | [https://leetcode.cn/problems/symmetric-tree/](https://leetcode.cn/problems/symmetric-tree/) |
-| 104. 二叉树的最大深度 | [https://leetcode.cn/problems/maximum-depth-of-binary-tree/](https://leetcode.cn/problems/maximum-depth-of-binary-tree/) |
-| 111. 二叉树的最小深度 | [https://leetcode.cn/problems/minimum-depth-of-binary-tree/](https://leetcode.cn/problems/minimum-depth-of-binary-tree/) |
-| 222. 完全二叉树的节点个数 | [https://leetcode.cn/problems/count-complete-tree-nodes/](https://leetcode.cn/problems/count-complete-tree-nodes/) |
-| 110. 平衡二叉树 | [https://leetcode.cn/problems/balanced-binary-tree/](https://leetcode.cn/problems/balanced-binary-tree/) |
-| 257. 二叉树的所有路径 | [https://leetcode.cn/problems/binary-tree-paths/](https://leetcode.cn/problems/binary-tree-paths/) |
+| 144二叉树的前序遍历 | [https://leetcode.cn/problems/binary-tree-preorder-traversal/](https://leetcode.cn/problems/binary-tree-preorder-traversal/) |
+| 94二叉树的中序遍历 | [https://leetcode.cn/problems/binary-tree-inorder-traversal/](https://leetcode.cn/problems/binary-tree-inorder-traversal/) |
+| 145二叉树的后序遍历 | [https://leetcode.cn/problems/binary-tree-postorder-traversal/](https://leetcode.cn/problems/binary-tree-postorder-traversal/) |
+| 226翻转二叉树 | [https://leetcode.cn/problems/invert-binary-tree/](https://leetcode.cn/problems/invert-binary-tree/) |
+| 101对称二叉树 | [https://leetcode.cn/problems/symmetric-tree/](https://leetcode.cn/problems/symmetric-tree/) |
+| 104二叉树的最大深度 | [https://leetcode.cn/problems/maximum-depth-of-binary-tree/](https://leetcode.cn/problems/maximum-depth-of-binary-tree/) |
+| 111二叉树的最小深度 | [https://leetcode.cn/problems/minimum-depth-of-binary-tree/](https://leetcode.cn/problems/minimum-depth-of-binary-tree/) |
+| 222完全二叉树的节点个数 | [https://leetcode.cn/problems/count-complete-tree-nodes/](https://leetcode.cn/problems/count-complete-tree-nodes/) |
+| **110平衡二叉树** | [https://leetcode.cn/problems/balanced-binary-tree/](https://leetcode.cn/problems/balanced-binary-tree/) |
+| **257二叉树的所有路径** | [https://leetcode.cn/problems/binary-tree-paths/](https://leetcode.cn/problems/binary-tree-paths/) |
 
 
 ## 思考与总结
