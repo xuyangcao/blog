@@ -467,3 +467,24 @@ a:visited { color: #205caa; }
     margin: 0 0 15px; }
 
 }
+
+
+.post-content table {
+  th {
+    font-weight: bold;
+  }
+  th,
+  td {
+    padding: 0.5rem 1rem;
+    border: 1px solid #111;
+  }
+}
+
+.post-conten th {
+  font-weight: bold;
+}
+.post-conten th,
+.post-conten td {
+  padding: 0.5rem 1rem;
+  border: 1px solid #111; 
+}
