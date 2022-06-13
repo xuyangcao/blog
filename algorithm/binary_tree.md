@@ -13,6 +13,8 @@ layout: page
 
 ## 前言
 
+二叉树是学习递归的优秀数据结构，对于二叉树问题的求解，关键在于对递归算法和不同二叉树的属性有深刻的理解。
+
 
 ## 题目列表
 
@@ -34,7 +36,20 @@ layout: page
 | 112路径总和 | [https://leetcode.cn/problems/path-sum/](https://leetcode.cn/problems/path-sum/) |
 | **113路径总和II** | [https://leetcode.cn/problems/path-sum-ii/](https://leetcode.cn/problems/path-sum-ii/) |
 | **106从中序与后序遍历序列构造二叉树** | [https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/](https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/) |
+| 105从前序与中序遍历序列构造二叉树 | [https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/](https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/) |
 | 654最大二叉树 | [https://leetcode.cn/problems/maximum-binary-tree/](https://leetcode.cn/problems/maximum-binary-tree/) |
+| 617合并二叉树 | [https://leetcode.cn/problems/merge-two-binary-trees/](https://leetcode.cn/problems/merge-two-binary-trees/) |
+| 700二叉搜索树中的搜索 | [https://leetcode.cn/problems/search-in-a-binary-search-tree/](https://leetcode.cn/problems/search-in-a-binary-search-tree/) |
+| **98验证二叉搜索树** | [https://leetcode.cn/problems/validate-binary-search-tree/](https://leetcode.cn/problems/validate-binary-search-tree/) |
+| **530二叉搜索树的最小绝对差** | [https://leetcode.cn/problems/minimum-absolute-difference-in-bst/](https://leetcode.cn/problems/minimum-absolute-difference-in-bst/)  |
+| 501二叉搜索树中的众数 | [https://leetcode.cn/problems/find-mode-in-binary-search-tree/](https://leetcode.cn/problems/find-mode-in-binary-search-tree/) |
+| **236二叉树的最近公共祖先** | [https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/) |
+| 235二叉搜索树的最近公共祖先 | [https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/) | 
+| 701二叉搜索树中的插入操作 | [https://leetcode.cn/problems/insert-into-a-binary-search-tree/](https://leetcode.cn/problems/insert-into-a-binary-search-tree/) |
+| **450删除二叉搜索树中的节点** | [https://leetcode.cn/problems/delete-node-in-a-bst/](https://leetcode.cn/problems/delete-node-in-a-bst/)|
+| **669修剪二叉搜索树** | [https://leetcode.cn/problems/trim-a-binary-search-tree/](https://leetcode.cn/problems/trim-a-binary-search-tree/) |
+| 108将有序数组转换为二叉搜索树 | [https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/](https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/) |
+| 538把二叉搜索树转换为累加树 | [https://leetcode.cn/problems/convert-bst-to-greater-tree/](https://leetcode.cn/problems/convert-bst-to-greater-tree/) |
 
 ## 思考与总结
 
@@ -73,7 +88,9 @@ layout: page
 
 在利用数组构建二叉树时，每次将一个数组拆分为左子树元素和右子树元素时尽量不要定义新数组，而是采用下标索引的方式更优，因为这样可以节省时间和空间成本。(如106和654题)
 
-在大型程序中，尽可能减少使用递归，换用迭代，防止递归过深出现问题
+在处理二叉搜索树时，需要充分考虑其特性，即左子树均小于中间节点，右子树均大于中间节点。因此，如果使用中序遍历，则整个树遍历出来就是从小到大排列的，类似于在处理有序数组，但也不是所有问题必须用中序遍历来处理。代码随想录中提供了一种使用pre指针处理相邻节点的操作，非常实用，建议掌握(98, 530题)。此外，二叉树的搜索一般是有方向的，因为数据的排列是有序的（#701）。
+
+在实际项目开发中，尽可能减少使用递归，因为项目参数和调用关系较为复杂，不易控制递归深度[1]。
 
 
 
