@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: page 
 ---
 
 ## 前言

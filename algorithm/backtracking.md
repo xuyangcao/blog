@@ -1,6 +1,5 @@
 ---
-layout: page
-id: backtracking
+layout: page 
 ---
 
 <!-- vim-markdown-toc Marked -->
