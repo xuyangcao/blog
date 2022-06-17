@@ -16,6 +16,11 @@
     width: 100%;
 }
 
+.book-header h1 a:hover {
+    font-size: 20px;
+    opacity: 100;
+}
+
 .book.with-summary .book-body .book-header {
     position: fixed;
     width: calc(100% - 300px);
