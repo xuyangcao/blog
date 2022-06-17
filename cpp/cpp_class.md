@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 ---
 
 # 深拷贝和浅拷贝

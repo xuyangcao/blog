@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post 
 ---
 
 - [Transformer整体架构](#transformer整体架构)

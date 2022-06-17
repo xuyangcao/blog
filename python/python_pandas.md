@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post 
 ---
 
 - [引言](#引言)

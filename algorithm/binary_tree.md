@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: post 
 ---
 
 <!-- vim-markdown-toc Marked -->

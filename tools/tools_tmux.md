@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post 
 ---
 
 - [前言](#前言)

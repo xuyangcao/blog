@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post 
 ---
 
 - [问题](#问题)

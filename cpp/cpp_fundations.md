@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 ---
 
 - [数组](#数组)

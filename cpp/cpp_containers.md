@@ -1,30 +1,30 @@
 ---
-layout: page
+layout: post 
 ---
 
 <!-- vim-markdown-toc Marked -->
 
 * [前言](#前言)
 * [序列式容器](#序列式容器)
-    * [vector](#vector)
-    * [deque](#deque)
-    * [list](#list)
-    * [array](#array)
-    * [forward_list](#forward_list)
+  * [vector](#vector)
+  * [deque](#deque)
+  * [list](#list)
+  * [array](#array)
+  * [forward_list](#forward_list)
 * [关联式容器](#关联式容器)
-    * [set](#set)
-    * [multiset](#multiset)
-    * [map](#map)
-    * [multimap](#multimap)
+  * [set](#set)
+  * [multiset](#multiset)
+  * [map](#map)
+  * [multimap](#multimap)
 * [无序关联式容器](#无序关联式容器)
-    * [unordered_set](#unordered_set)
-    * [unordered_multiset](#unordered_multiset)
-    * [unordered_map](#unordered_map)
-    * [unordered_multimap](#unordered_multimap)
+  * [unordered_set](#unordered_set)
+  * [unordered_multiset](#unordered_multiset)
+  * [unordered_map](#unordered_map)
+  * [unordered_multimap](#unordered_multimap)
 * [容器适配器](#容器适配器)
-    * [stack](#stack)
-    * [quque](#quque)
-    * [priority_queue](#priority_queue)
+  * [stack](#stack)
+  * [quque](#quque)
+  * [priority_queue](#priority_queue)
 * [参考资料](#参考资料)
 
 <!-- vim-markdown-toc -->
