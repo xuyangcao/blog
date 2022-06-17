@@ -17,8 +17,16 @@
 }
 
 .book-header h1 a:hover {
-    font-size: 20px;
     opacity: 100;
+    font-size: 20px;
+    color: #4183c4;
+    font-weight: 600;
+}
+.book-header h1 a {
+    opacity: 100;
+    font-size: 20px;
+    color: #4183c4;
+    font-weight: 600;
 }
 
 .book.with-summary .book-body .book-header {
@@ -217,13 +225,6 @@
   color: #A61717;
   text-align: center;
   /* text-align: justify; */
-}
-
-.book-header h1 {
-    opacity: 100;
-    font-size: 20px;
-    color: #4183c4;
-    font-weight: 600;
 }
 
 .book-body h2,
