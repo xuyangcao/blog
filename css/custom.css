@@ -3,14 +3,18 @@
 
 .book-body {
     overflow-y: scroll;
+    /* font-family: Helvetica, Arial, sans-serif; */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 300;
+    background-color: #fdfdfd;
 }
 
 .book-body .book-header {
     position: fixed;
     width: 100%;
 }
-
-
 
 .book.with-summary .book-body .book-header {
     position: fixed;
@@ -55,8 +59,7 @@
 }
 
 .back-to-top {
-    right: calc((100% - 300px - min(100% - 300px, {{ site.page_width }})) / 2 - 40px);
-    bottom: 50px;
+    right: calc((100% - 300px - min(100% - 300px, {{ site.page_width }})) / 2 + 30px);
 }
 
 /* scrollbar */
@@ -144,16 +147,13 @@
     color: inherit;
 }
 
-
 /* Custom font settings */
-
 .book.font-family-0 {
     font-family: Georgia, serif;
 }
 .book.font-family-1 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
 
 .module-header {
   font-size: 18px;
@@ -183,3 +183,89 @@
 }
 .site-footer .column { float: left; margin-bottom: 15px; }
 
+/* Custom CSS for pages */
+.figcenter {
+  text-align: center;
+}
+.fig img {
+  max-width: 98%;
+}
+.figleft img {
+  max-width: 50%;
+  float: left;
+  margin-right: 20px;
+}
+.figleft svg {
+  float: left;
+  margin-right: 20px;
+}
+.fighighlight {
+  /* background-color: #f7f6f1; */
+  padding: 20px 4px 20px 4px;
+  border-bottom: 1px solid #999;
+  border-top: 1px solid #999;
+  /* box-shadow: 0px 2px 5px #CCC, 0px -2px 5px #CCC; */
+}
+.figcaption {
+  font-weight: 400;
+  font-size: 14px;
+  color: #A61717;
+  text-align: center;
+  /* text-align: justify; */
+}
+
+.book-header h1 {
+    opacity: 100;
+    font-size: 20px;
+}
+
+.book-body h2,
+.book-body h3,
+.book-body h4,
+.book-body h5,
+.book-body h6 {
+  line-height: 1;
+  font-weight: 500;
+  margin: 40px 0 20px;
+}
+
+.book-body h2 {
+  font-size: 22px;
+  letter-spacing: -1.25px;
+}
+
+.book-body h3 {
+  font-size: 18px;
+  letter-spacing: -1px;
+}
+
+.book-body h4 {
+  font-size: 16px;
+  letter-spacing: -1px;
+}
+
+/* list */
+.book-body ul,
+.book-body ol { padding-left: 20px; }
+
+/* table */
+.book-body table {
+  margin-bottom: 10px;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #828282;
+  text-align: left;
+}
+.book-body th {
+  padding: 5px;
+  background-color: #c7c7c7;
+  border: 1px solid #828282;
+  border-bottom-color: #828282;
+}
+.book-body tr:nth-child(even) {
+  background-color: #f7f6f1;
+}
+.book-body td {
+  padding: 5px;
+  border: 1px solid #828282;
+}
