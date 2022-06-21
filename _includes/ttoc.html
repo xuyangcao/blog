@@ -12,9 +12,20 @@
             </li>
 
             <li class="divider"></li>
+
+            {% if page.url == post.url %}
+            <li class="chapter active" data-level="1.1" data-path="{{site.baseurl}}{{post.url}}">
+            {% else %}
+            <li class="chapter" data-level="1.1" data-path="{{site.baseurl}}{{post.url}}">
+            {% endif %}
+
             <div class="materials-item toc">
-            {% include toc.html html=content h_min=site.toc.h_min h_max=site.toc.h_max %}
+            <a href="{{site.baseurl}}{{post.url}}">
+                {{ post.title | escape }}
+            </a>
+              {% include toc.html html=content h_min=site.toc.h_min h_max=site.toc.h_max %}
             </div>
+
 
         </ul>
     </nav>
