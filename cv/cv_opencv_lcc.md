@@ -2,15 +2,6 @@
 layout: post 
 ---
 
-- [前言](#前言)
-- [错误的版本](#错误的版本)
-  - [Python版](#python版)
-  - [c++版](#c版)
-- [改进的版本](#改进的版本)
-  - [Python版](#python版-1)
-  - [c++版](#c版-1)
-
-
 ## 前言
 
 之前在印象笔记中写过一个python+opencv版的最大连通域标记的程序，当时使用的是opencv2版本中的findContours函数作为载体，由于没有在意findContours中的各个contours之间的hierarchy关系，后来在一次实验中发现这种方式是有不足之处的，最方便的还是使用连通域标记算法将图像标记为各个连通域，然后在取连通域最大的区域这种方法。
@@ -81,7 +72,7 @@ if __name__ == '__main__':
 
 
 ### c++版
-```
+```cpp
 void findLargesrArea(Mat srcImage, Mat &dstImage)
 {
     vector<vector<Point>>	contours;
@@ -184,7 +175,7 @@ def largestConnectComponent(bw_img, ):
 ### c++版
 由于opencv3中增加了连通域标记函数，因此使得查找最大连通域变得更加容易。代码如下：
 
-```
+```cpp
 void DefectsDetector::LargestConnecttedComponent(Mat srcImage, Mat &dstImage)
 {
     Mat temp;

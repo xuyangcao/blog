@@ -2,9 +2,6 @@
 layout: post
 ---
 
-- [Demo](#demo)
-- [Reference](#reference)
-
 ## Demo
 
 ```python 
