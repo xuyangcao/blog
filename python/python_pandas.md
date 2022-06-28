@@ -3,10 +3,12 @@ layout: post
 ---
 
 
-# 引言
+## 引言
+
 **Pandas**具有超强的数据处理能力，似乎是目前处理日常**csv**和**Excel**文件中最好用的工具包。结合**Matplotlib**工具包，基本可以满足上述两种文件的处理和显示工作。 
 
-# 数据结构
+## 数据结构
+
 我们介绍Pandas中的两种主要数据结构：**Series**与**DataFrame**，其示意图如下所示：
 
 <div class="fig figcenter">
@@ -58,11 +60,13 @@ Out[29]:
 2  7  8  9
 ```
 
-# 常用属性及方法
-## Series
+## 常用属性及方法
+
+### Series
+
 在我的应用中，基本接触不到Series，因此这里就不介绍了
 
-## DataFrame
+### DataFrame
 
 函数|描述
 :-:|:-:
@@ -70,7 +74,7 @@ df.to_csv('text.csv') | 保存dataframe到csv文件中
 df = pd.read_csv('text.csv') | 读csv文件到dataframe中
 
 
-# 参考资料
+## 参考资料
 
 [数据分析三剑客之pandas](https://www.cnblogs.com/peng104/p/10398490.html)
 [pandas用法总结](https://blog.csdn.net/yiyele/article/details/80605909)

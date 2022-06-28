@@ -2,7 +2,8 @@
 layout: post 
 ---
 
-# 简介
+## 简介
+
 本文主要介绍python的异常处理机制，包括：
 1. 如何使用异常处理
 2. 异常的传递
@@ -12,8 +13,8 @@ layout: post
 
 有一些代码来源于网络。
 
-<!-- more -->
-# 如何使用异常处理
+## 如何使用异常处理
+
 所有的面向对象语言对异常的处理方式大同小异，在python中的处理异常的结构如下：
 
 ```python
@@ -32,7 +33,8 @@ finally:
 ```
 接下来我们对上述结构逐一介绍。
 
-## try ... except
+### try ... except
+
 `try`里面放可能出现问题的代码
 `except`里面放捕获到错误之后的处理的方法
 
@@ -59,7 +61,8 @@ except (NameError, IOError):
 catch exception
 ```
 
-## 捕获所有异常
+### 捕获所有异常
+
 `Exception`类是所有异常类的父类，可以直接用`Exception`接收所有异常。
 ```python
 try:
@@ -87,7 +90,8 @@ else:
 not catch IOError!
 ```
 
-## try ... finally
+### try ... finally
+
 无论检测到还是检测不到异常，有些代码都需要执行，此时放在`finally`里。
 ```python
 import time
@@ -111,7 +115,8 @@ except:
     print("没有这个文件")
 ```
 
-# 异常的传递
+## 异常的传递
+
 使用`try ... except`捕获异常还有一个好处，即异常可以跨越多层进行传递。如下面的例子：
 
 ```python
@@ -140,9 +145,10 @@ test3()
 ```
 这样我们就可以不必在每个可能出现错误的地方都写上`try`，而只需要在合适的层次进行处理即可。
 
-# 抛出异常
+## 抛出异常
 
-## 抛出已有异常
+### 抛出已有异常
+
 可以通过`raise`来将捕获到的异常再抛出去。如下：
 ```python
 class Test(object):
@@ -178,7 +184,8 @@ Traceback (most recent call last):
     return a/b
 ZeroDivisionError: integer division or modulo by zero
 ```
-## 抛出自定义异常
+### 抛出自定义异常
+
 自定义异常需要继承`Exception`类即可，如下：
 ```python
 # -*- coding:utf8 -*- 
