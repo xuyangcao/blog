@@ -4,9 +4,17 @@ layout: post
 
 ## 前言
 
-**问题**: Vim编辑器在使用C++第三方库时（以OpenCV为例）发现YCM解析失效，找不到库文件。
 
-**分析**: 通过YCM文档[1], 学习了YCM对代码进行语义分析的基本原理，如下：
+在众多Vim编辑器的自动补全插件中，[YouCompleteMe(YCM)](https://github.com/ycm-core/YouCompleteMe/)绝对是最好用的插件之一，但其配置过程往往令初学者望而却步。经过笔者多年折腾，至今基本达到满足日常使用水平。
+
+如果读者对YouCompleteMe这个插件不熟悉，建议首先参考笔者的博客[Vim: 配置Python和C++常用插件](https://xuyangcao.github.io/blog/tools/vim_configs/)。
+
+在使用Vim编辑C族语言代码时，如果额外使用了某些第三方库（如OpenCV），会发现YCM解析失效，找不到库文件，后序自动联想也无法使用。为此，本文结合YCM文档，首先分析一下为什么YCM在此情况下会失效，然后再给出对应的解决方案。
+
+
+## YCM语义分析原理
+
+通过YCM文档[1], 学习了YCM对代码进行语义分析的基本原理，如下：
 
 - YCM使用`clangd`工具（依赖clang编译器）对代码进行语义分析，如代码补全，`GoTo`，代码诊断等。如果`clangd`无法解析代码，则YCM就无法提供语义分析功能。
 

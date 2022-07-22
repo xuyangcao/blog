@@ -6,7 +6,11 @@ layout: post
 
 在众多Vim编辑器的自动补全插件中，[YouCompleteMe(YCM)](https://github.com/ycm-core/YouCompleteMe/)绝对是最好用的插件之一，但其配置过程往往令初学者望而却步。经过笔者多年折腾，至今基本达到满足日常使用水平。
 
-在使用Vim+YCM时，YCM通常不能直接对第三方软件库（如在c++模式下的OpenCV）中的函数和定义进行自动补全。为此，本文主要介绍如何使用ctags生成tags文件，并使其提升YCM在第三方软件库中的自动补全动能。
+如果读者对YouCompleteMe这个插件不熟悉，建议首先参考笔者的博客[Vim: 配置Python和C++常用插件](https://xuyangcao.github.io/blog/tools/vim_configs/)。
+
+为更好地理解本文，建议读者首先阅读我的上一篇博客[Vim: 扩展YCM对C族语言第三方库的语义分析功能](https://xuyangcao.github.io/blog/tools/vim_ycm_semantic_analysis/)。在这篇博客中，我们解决了YCM的语义分析出错问题，但对自动补全功能的提升有限。
+
+在使用Vim+YCM时，YCM通常不能直接对第三方软件库（如在c++模式下的OpenCV）中的函数和定义进行自动补全。为此，本文主要介绍如何使用ctags生成tags文件，在上一篇博客的基础上进一步提升YCM在第三方软件库中的自动补全动能。
 
 ## 配置过程
 
