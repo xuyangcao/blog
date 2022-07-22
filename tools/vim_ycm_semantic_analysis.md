@@ -43,7 +43,7 @@ Option 1: Use a [compilation database](https://clang.llvm.org/docs/JSONCompilati
 1. 在配置好的CMakeLists.txt中添加如下内容：
 
 ```bash
-set( CMAKE_EXPORT_COMPILE_COMMANDS ON
+set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
 ```
 
 2. cmake一下，再编辑即可
