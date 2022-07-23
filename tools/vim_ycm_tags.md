@@ -4,7 +4,7 @@ layout: post
 
 ## 前言
 
-在众多Vim编辑器的自动补全插件中，[YouCompleteMe(YCM)](https://github.com/ycm-core/YouCompleteMe/)绝对是最好用的插件之一，但其配置过程往往令初学者望而却步。经过笔者多年折腾，至今基本达到满足日常使用水平。
+在众多Vim编辑器的自动补全插件中，[YouCompleteMe(YCM)](https://github.com/ycm-core/YouCompleteMe/)绝对是最好用的插件之一，但其配置过程往往令很多初学者望而却步。经过笔者多年折腾，至今基本达到满足日常使用水平。
 
 如果读者对YouCompleteMe这个插件不熟悉，建议首先参考笔者的博客[Vim: 配置Python和C++常用插件](https://xuyangcao.github.io/blog/tools/vim_configs/)。
 
@@ -33,6 +33,7 @@ sudo apt-get install ctags
 >Exuberant Ctags 5.9~svn20110310, Copyright (C) 1996-2009 Darren Hiebert
 >Addresses: <dhiebert@users.sourceforge.net>, http://ctags.sourceforge.net
 >Optional compiled features: +wildcards, +regex
+>```
 
 
 #### 2 生成Tags文件
